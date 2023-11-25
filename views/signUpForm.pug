@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+    h1 Sign Up Form
+    form(action="", method="post") 
+        label Username  
+            input(type="text" placeholder='Username' name='username' required='true' value=(undefined===user ? '' : user.username))
+        label First Name    
+            input(type="text" placeholder = 'First name' name= "firstName" required=true value=(undefined === user? '':user.firstName))
+        label Last Name
+            input(type="text" placeholder="Last Name" name="lastName" required=true value = (undefined===user?'':user.lastName))
+        label Password
+            input(type="password", name="password" required=true value=(undefined===user?'':user.password))
+        label Confirm Password
+            input(type="password", name="passwordConfirmation" required=true )
+            
