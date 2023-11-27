@@ -8,5 +8,5 @@ router.get("/", function (req, res, next) {
 });
 router.get("/signUp", userController.getUserForm);
 
-router.post("/signUp", (req, res, next) => {});
+router.post("/signUp", userController.postUserForm);
 module.exports = router;
