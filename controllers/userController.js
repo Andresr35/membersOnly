@@ -1,10 +1,35 @@
 const User = require("../models/users");
+const passport = require("passport");
 const asyncHander = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 
 exports.getUserForm = asyncHander(async (req, res, next) => {
   res.render("signUpForm");
+});
+
+exports.getUserInfo = asyncHander(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  res.render("user", { user: user });
+});
+
+exports.getLogIn = asyncHander(async (req, res, next) => {
+  res.render("logIn");
+});
+
+exports.getLogOut = asyncHander(async (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    } else {
+      res.redirect("/");
+    }
+  });
+});
+
+exports.postLogIn = passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/",
 });
 
 exports.postUserForm = [

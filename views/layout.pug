@@ -4,4 +4,22 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    nav 
+      if user 
+        h2 Welcome to Member Chat #{user.firstName}!
+      else
+        h2 Welcome to Member Chat   
+      ul 
+        if user
+          li 
+            a(href=user.url) Profile
+          li
+            a(href="/member") Members
+          li 
+            a(href="/logout") Logout
+
+        else 
+          li
+            a(href="/login") Log in
+        
     block content

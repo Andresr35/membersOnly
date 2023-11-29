@@ -1,0 +1,10 @@
+extends layout 
+
+block content   
+    h1 Log In   
+    form(action="", method="post") 
+        label Username  
+            input(type="text" placeholder='Username' name='username' required='true' )
+        label Password
+            input(type="password", name="password" required=true )
+        button(type="submit") Log In

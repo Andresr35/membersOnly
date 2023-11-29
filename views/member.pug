@@ -1,0 +1,6 @@
+extends layout 
+
+block content
+    h3 Hello #{user.firstName}!
+    if user.membership
+        p Looks like you have a membership already!

@@ -4,5 +4,27 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
+}
+nav {
+  background-color: rgb(180, 173, 173);
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+nav h2 {
+  color: white;
+  display: inline;
+}
+nav ul {
+  display: flex;
+  list-style-type: none;
+  gap: 10px;
+  justify-content: right;
+  align-items: center;
+}
+nav a {
+  color: white;
+  text-decoration: none;
 }
