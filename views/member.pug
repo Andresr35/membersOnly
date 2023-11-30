@@ -3,4 +3,10 @@ extends layout
 block content
     h3 Hello #{user.firstName}!
     if user.membership
-        p Looks like you have a membership already!
+        p Looks like you have a membership already! Welcome to the club.
+    else
+        p If you would like to join our club, please enter the code below 
+        form(action="" method = 'post') 
+            label Membership Code
+                input(type="text" name='code' required='true' placeholder='Membership Code')
+            button(type="submit") Submit

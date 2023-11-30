@@ -27,6 +27,29 @@ exports.getLogOut = asyncHander(async (req, res, next) => {
   });
 });
 
+exports.getMemberForm = asyncHander(async (req, res, next) => {
+  res.render("member", { user: req.user });
+});
+
+exports.postMemberForm = asyncHander(async (req, res, next) => {
+  const user = req.user;
+  const dbUser = await User.findById(req.user.id);
+  if (req.body.code == "password") {
+    console.log({ ...dbUser });
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      {
+        ...user._doc,
+        membership: true,
+      },
+      {}
+    );
+    res.redirect(updatedUser.url);
+  } else {
+    res.render("member", { user: req.user });
+  }
+});
+
 exports.postLogIn = passport.authenticate("local", {
   successRedirect: "/",
   failureRedirect: "/",
