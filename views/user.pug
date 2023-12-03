@@ -2,3 +2,20 @@ extends layout
 
 block content 
     h1 Hello #{user.firstName} #{user.lastName}
+    p Username: #{user.username}
+    p Membership status: #{user.membership}
+    p Admin status: #{user.admin}
+    if posts
+        each post in posts
+            h3 #{post.title}
+            p  #{post.message}
+            if user
+                p #{post.user.firstName} #{post.user.lastName}
+                p #{post.timestamp}
+                if user.admin 
+                form(action="", method="post") 
+                    button(type="submit") Delete Post
+        else 
+            p This user has no posts     
+    else 
+        p This user has no posts

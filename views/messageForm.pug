@@ -1,0 +1,9 @@
+extends layout 
+
+block content
+    form(action="" method = "post") 
+        label Title
+            input(type="text" name="title" placeholder="title" required="true")
+        label Message   
+            input(type="text" name="message" placeholder="Enter Message Here")
+        button(type="submit") Create Post

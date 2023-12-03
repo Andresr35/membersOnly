@@ -1,0 +1,11 @@
+extends layout 
+
+block content   
+    if user.admin
+        p Looks like you are already an Admin. Thanks for helping regulate the community! 
+    else
+        p If you would like to be an admin, please enter the admin code please.
+        form(action="", method="post") 
+            label Admin Code 
+                input(type="text" name="adminCode" required="true" placeholder= "Admin Code")
+            button(type="submit") Submit

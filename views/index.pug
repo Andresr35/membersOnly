@@ -1,5 +1,20 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  if user
+    a(href="/messageForm") Create New Message
+  if posts
+    each post in posts  
+      h3 #{post.title}
+      p  #{post.message}
+      if user
+        p #{post.user.firstName} #{post.user.lastName}
+        p #{post.timestamp}
+        if user.admin 
+          form(action="/deletePost", method="post") 
+            input(type="hidden", name="postID", required="true" value = post._id)
+            button(type="submit") Delete Post
+    else 
+      p There are currently no posts  
+  else 
+    p There are currently no posts  

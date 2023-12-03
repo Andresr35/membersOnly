@@ -11,6 +11,11 @@ const UserSchema = new Schema({
     required: true,
     default: false,
   },
+  admin: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 UserSchema.virtual("url").get(function () {

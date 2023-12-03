@@ -6,15 +6,19 @@ html
   body
     nav 
       if user 
-        h2 Welcome to Member Chat #{user.firstName}!
+        h2 
+          a(href="/") Welcome to Member Chat #{user.firstName}!
       else
-        h2 Welcome to Member Chat   
+        h2 
+        a(href="/") Welcome to Member Chat   
       ul 
         if user
           li 
             a(href=user.url) Profile
           li
             a(href="/users/member") Members
+          li
+            a(href="/users/admin") Admin
           li 
             a(href="/logout") Logout
 

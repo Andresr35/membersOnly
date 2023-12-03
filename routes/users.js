@@ -7,6 +7,8 @@ router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
 router.get("/member", userController.getMemberForm);
+router.get("/admin", userController.getAdminForm);
+router.post("/admin", userController.postAdminForm);
 router.post("/member", userController.postMemberForm);
 router.get("/:id", userController.getUserInfo);
 

@@ -1,4 +1,5 @@
 const User = require("../models/users");
+const Post = require("../models/posts");
 const passport = require("passport");
 const asyncHander = require("express-async-handler");
 const bcrypt = require("bcryptjs");
@@ -9,8 +10,12 @@ exports.getUserForm = asyncHander(async (req, res, next) => {
 });
 
 exports.getUserInfo = asyncHander(async (req, res, next) => {
-  const user = await User.findById(req.params.id);
-  res.render("user", { user: user });
+  const [user, posts] = await Promise.all([
+    User.findById(req.params.id),
+    Post.find({ user: req.user._id }),
+  ]);
+  console.log(req.user);
+  res.render("user", { user: user, posts: posts });
 });
 
 exports.getLogIn = asyncHander(async (req, res, next) => {
@@ -31,13 +36,31 @@ exports.getMemberForm = asyncHander(async (req, res, next) => {
   res.render("member", { user: req.user });
 });
 
+exports.getAdminForm = asyncHander(async (req, res, next) => {
+  res.render("adminForm", { user: req.user });
+});
+
+exports.postAdminForm = asyncHander(async (req, res, next) => {
+  if (req.body.adminCode == "admin") {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        ...req.user._doc,
+        admin: true,
+      },
+      {}
+    );
+    res.redirect(updatedUser.url);
+  } else {
+    res.render("adminForm", { user: req.user });
+  }
+});
+
 exports.postMemberForm = asyncHander(async (req, res, next) => {
   const user = req.user;
-  const dbUser = await User.findById(req.user.id);
   if (req.body.code == "password") {
-    console.log({ ...dbUser });
     const updatedUser = await User.findByIdAndUpdate(
-      req.user.id,
+      req.user._id,
       {
         ...user._doc,
         membership: true,
