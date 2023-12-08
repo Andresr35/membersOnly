@@ -2,19 +2,22 @@ extends layout
 
 block content
   if user
-    a(href="/messageForm") Create New Message
+    a(href="/messageForm" class="button") Create New Message?
   if posts
-    each post in posts  
-      h3 #{post.title}
-      p  #{post.message}
-      if user
-        p #{post.user.firstName} #{post.user.lastName}
-        p #{post.timestamp}
-        if user.admin 
-          form(action="/deletePost", method="post") 
-            input(type="hidden", name="postID", required="true" value = post._id)
-            button(type="submit") Delete Post
-    else 
-      p There are currently no posts  
+    div(class = "posts")
+      each post in posts 
+        div(class="post") 
+          h3(class="postTitle") #{post.title}
+          hr
+          p  #{post.message}
+          if user
+            p(class="postName") By #{post.user.firstName} #{post.user.lastName}
+            p(class="postTime") #{post.timestamp}
+            if user.admin 
+              form(action="/deletePost", method="post") 
+                input(type="hidden", name="postID", required="true" value = post._id)
+                button(type="submit" class="button") Delete Post
+      else 
+        p There are currently no posts  
   else 
     p There are currently no posts  
