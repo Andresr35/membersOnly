@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
-    "server": "DEBUG=membersOnly:* npm run devstart"
+    "server": "DEBUG=membersOnly:* npm run devstart",
+    "deploy": "firebase deploy --only functions"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -16,6 +17,8 @@
     "express-async-handler": "^1.2.0",
     "express-session": "^1.17.3",
     "express-validator": "^7.0.1",
+    "firebase": "^10.7.1",
+    "firebase-admin": "^12.0.0",
     "http-errors": "~1.6.3",
     "mongoose": "^8.0.1",
     "morgan": "~1.9.1",

@@ -1,6 +1,7 @@
 require("dotenv").config();
 const bcrypt = require("bcryptjs");
-
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -14,7 +15,21 @@ const User = require("./models/users");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
-var app = express();
+const firebaseConfig = {
+  apiKey: process.env.FIREBASE_KEY,
+  authDomain: process.env.FIREBASE_DOMAN,
+  projectId: process.env.FIREBASE_ID,
+  storageBucket: process.env.FIREBASE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID,
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+// var app = express();
 
 // connect to database
 const mongoose = require("mongoose");
